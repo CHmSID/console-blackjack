@@ -11,7 +11,8 @@ int main() {
     bool quitGame = false;
     string userLine;
 
-    printf("Welcome to Blackjack!\n\n");
+    printf("Welcome to Blackjack!\n");
+    printf("Type 'help' for instructions\n\n");
 
     Deck deck;
     deck.setNewDeck();
@@ -25,7 +26,7 @@ int main() {
     // //END DEBUG
 
     deck.shuffle();
-    printf("Deck now has %d cards\n", (int)(deck.getDeck()->size()));
+    // printf("Deck now has %d cards\n", (int)(deck.getDeck()->size()));
 
     Player player;
     player.giveCard(deck);
@@ -50,7 +51,16 @@ int main() {
         else if(userLine == "list" || userLine == "l"){
 
             player.printHand();
-            printf("Deck now has %d cards\n", (int)(deck.getDeck()->size()));
+            // printf("Deck now has %d cards\n", (int)(deck.getDeck()->size()));
+        }
+        else if(userLine == "help"){
+            printf("Your goal in this game is to get your points as close "
+                "as possible to 21\n"
+                "You can:\n'hit' to take another card\n"
+                "'stand' to check the dealer\n"
+                "'list' to check your hand\n"
+                "'quit' or 'exit' to end the program and\n"
+                "'help' to bring up this text again.\n");
         }
     }
 
