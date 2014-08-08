@@ -1,12 +1,18 @@
 #include "player.hpp"
 #include "deck.hpp"
 #include <stdio.h>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 using std::string;
 using std::cin;
+using std::srand;
+using std::time;
 
 int main() {
+
+    srand(time(0));
 
     bool quitGame = false;
     string userLine;
@@ -60,7 +66,7 @@ int main() {
                 "'stand' to check the dealer\n"
                 "'list' to check your hand\n"
                 "'quit' or 'exit' to end the program and\n"
-                "'help' to bring up this text again.\n");
+                "'help' to bring up this text again\n");
         }
     }
 
