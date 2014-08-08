@@ -1,22 +1,25 @@
 #ifndef DECK_H
 #define DECK_H
+#include "card.hpp"
 #include <vector>
-#include "card.h"
+
+using std::vector;
 
 class Deck {
 
 public:
-    Deck();
-    ~Deck();
+    // Deck();
+    // ~Deck();
 
     void setNewDeck();  //puts all cards back into the deck
             //only use together with Player.emptyHand()
             //to avoid duplicate cards
-    void shuffleDeck();
+    void shuffle();
     void printDeck();   //Debug procedure
+    int getSize()const;
 
 private:
-    std::vector<Card> deck;
+    vector<Card> deck;
 };
 
 #endif

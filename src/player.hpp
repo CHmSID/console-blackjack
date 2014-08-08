@@ -1,6 +1,6 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
-#include "card.h"
+#include "card.hpp"
 #include <vector>
 
 using std::vector;
