@@ -1,15 +1,9 @@
 #include "deck.hpp"
 #include <stdio.h>
+#include <vector>
 #include <algorithm>    //for shuffling
 
-// Deck::Deck() {
-
-// }
-
-// Deck::~Deck() {
-
-// }
-
+using std::vector;
 using std::random_shuffle;
 
 void Deck::setNewDeck() {
@@ -42,4 +36,9 @@ void Deck::printDeck() {
 int Deck::getSize()const{
 
     return deck.size();
+}
+
+vector<Card>* Deck::getDeck(){
+
+    return &deck;
 }

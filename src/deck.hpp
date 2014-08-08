@@ -18,6 +18,8 @@ public:
     void printDeck();   //Debug procedure
     int getSize()const;
 
+    vector<Card>* getDeck();
+
 private:
     vector<Card> deck;
 };
