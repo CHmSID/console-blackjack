@@ -1,3 +1,6 @@
+/*
+Author: Jerzy Baran
+*/
 #include "dealer.hpp"
 #include <stdio.h>
 #include <vector>

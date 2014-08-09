@@ -1,3 +1,6 @@
+/*
+Author: Jerzy Baran
+*/
 #ifndef DEALER_HPP
 #define DEALER_HPP
 #include "player.hpp"

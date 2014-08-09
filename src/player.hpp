@@ -1,3 +1,6 @@
+/*
+Author: Jerzy Baran
+*/
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 #include "card.hpp"

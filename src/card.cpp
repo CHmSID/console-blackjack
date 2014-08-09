@@ -1,3 +1,6 @@
+/*
+Author: Jerzy Baran
+*/
 #include "card.hpp"
 #include <sstream>
 

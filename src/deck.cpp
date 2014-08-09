@@ -1,3 +1,6 @@
+/*
+Author: Jerzy Baran
+*/
 #include "deck.hpp"
 #include <stdio.h>
 #include <vector>

@@ -1,3 +1,6 @@
+/*
+Author: Jerzy Baran
+*/
 #include "player.hpp"
 #include "card.hpp"
 #include "deck.hpp"
