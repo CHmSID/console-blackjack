@@ -87,7 +87,6 @@ int Player::getPoints() {
 
 void Player::printHand() {
 
-	printf("You have %d points, your cards are:\n", getPoints());
 	for(int i = 0; i < playerHand.size(); i++) {
 
         printf("%s of %s\n",

@@ -18,7 +18,7 @@ public:
 	int getPoints();	//when the player says 'stand'
 	void printHand();
 
-private:
+protected:
 	vector<Card> playerHand;
 };
 

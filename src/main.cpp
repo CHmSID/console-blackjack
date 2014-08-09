@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "dealer.hpp"
 #include "deck.hpp"
 #include <stdio.h>
 #include <cstdlib>
@@ -9,6 +10,8 @@ using std::string;
 using std::cin;
 using std::srand;
 using std::time;
+
+void newGame(Deck& deck, Player& player, Dealer& dealer);
 
 int main() {
 
@@ -21,24 +24,11 @@ int main() {
     printf("Type 'help' for instructions\n\n");
 
     Deck deck;
-    deck.setNewDeck();
-
-    // //DEBUG
-    // printf("Deck set, %d cards in deck:\n", deck.getSize());
-    // deck.printDeck();
-    // printf("Shuffling...\n\n");
-    // deck.shuffle();
-    // deck.printDeck();
-    // //END DEBUG
-
-    deck.shuffle();
-    // printf("Deck now has %d cards\n", (int)(deck.getDeck()->size()));
 
     Player player;
-    player.giveCard(deck);
-    player.giveCard(deck);
+    Dealer dealer;
 
-    printf("The game begins\n");
+    newGame(deck, player, dealer);
 
     while(!quitGame) {
 
@@ -52,12 +42,12 @@ int main() {
         }
         else if(userLine == "hit" || userLine == "h"){
 
-            //todo
+            //stodo
         }
         else if(userLine == "list" || userLine == "l"){
 
+            printf("You have %d points, your cards are:\n", player.getPoints());
             player.printHand();
-            // printf("Deck now has %d cards\n", (int)(deck.getDeck()->size()));
         }
         else if(userLine == "help"){
             printf("Your goal in this game is to get your points as close "
@@ -75,3 +65,20 @@ int main() {
 
 /* one more thing , you should use assert() and static_assert() to enforce 
    class invariants and pre-conditions, and post-conditions*/
+
+void newGame(Deck& deck, Player& player, Dealer& dealer){
+
+    deck.setNewDeck();
+    deck.shuffle();
+
+    player.emptyHand();
+    dealer.emptyHand();
+
+    printf("The game now begins!\n");
+
+    player.giveCard(deck);
+    player.giveCard(deck);
+
+    dealer.giveCard(deck);
+    dealer.revealCard();
+}
