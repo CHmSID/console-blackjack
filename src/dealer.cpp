@@ -5,7 +5,7 @@
 void Dealer::revealCard()const{
 
     printf("Dealer reveals his card: %s of %s\n",
-        playerHand.at(0).getVerboseValue(),
+        playerHand.at(0).getVerboseValue(), //see player.hpp for both
         playerHand.at(0).getSuit());
 }
 

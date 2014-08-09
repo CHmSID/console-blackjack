@@ -3,24 +3,19 @@
 #include "deck.hpp"
 #include <stdio.h>
 
-Player::Player() {
-
-}
-
-Player::~Player() {
-
-}
-
 void Player::giveCard(Deck& deck) {
 
+    //check if the deck by any chance is empty(highly unlikely)
     if(deck.getDeck()->size() < 0){
         printf("ERROR: no cards in deck");
         return;
     }
 
+    //see deck.hpp for further info on getDeck()
+    //get the last card from the deck
     Card card = deck.getDeck()->at(deck.getDeck()->size() - 1);
-    deck.getDeck()->pop_back();
-    playerHand.push_back(card);
+    deck.getDeck()->pop_back(); //delete that card from the deck
+    playerHand.push_back(card); //add it to player's(or dealer's) hand
 }
 
 void Player::emptyHand() {
@@ -40,6 +35,8 @@ int Player::getPoints() {
 
             for(int k = playerHand.size(); i > (int)(playerHand.size() / 2); i--){
 
+                //check if the card at the end is non-ace
+                //no point in swapping two aces
                 if(playerHand.at(k).getCardId() != 0){
 
                     //swap
@@ -64,6 +61,7 @@ int Player::getPoints() {
         //2-9
         if(playerHand.at(i).getCardId() > 0 && playerHand.at(i).getCardId() < 9){
 
+            //ids start at 0, ace has id 0, 2 has id 1, so we need to shift it
             points += (playerHand.at(i).getCardId() + 1);
         }
         //10, jack, queen, king
@@ -90,7 +88,7 @@ void Player::printHand() {
 	for(int i = 0; i < playerHand.size(); i++) {
 
         printf("%s of %s\n",
-            playerHand.at(i).getVerboseValue(),
+            playerHand.at(i).getVerboseValue(), //see card.hpp
             playerHand.at(i).getSuit());
     }
 }

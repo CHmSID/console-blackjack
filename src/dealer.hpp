@@ -6,8 +6,8 @@
 class Dealer: public Player{
 
 public:
-    void revealCard()const;  //reveals the first card in hand
-    void fillHand(Deck& deck);    //takes cards until points over 17
+    void revealCard()const;       //reveals the first card in hand
+    void fillHand(Deck& deck);    //takes cards until points are above 17
 };
 
 #endif

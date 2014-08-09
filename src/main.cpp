@@ -1,10 +1,10 @@
 #include "player.hpp"
 #include "dealer.hpp"
 #include "deck.hpp"
-#include <stdio.h>
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
+#include <stdio.h>  //printf()
+#include <cstdlib>  //srand()
+#include <ctime>    //time()
+#include <iostream> //cin
 
 using std::string;
 using std::tolower;
@@ -12,6 +12,7 @@ using std::cin;
 using std::srand;
 using std::time;
 
+//declarations
 void newGame(Deck& deck, Player& player, Dealer& dealer);
 void printPlayerStatus(Player& player);
 void toLowerCase(string& s);
@@ -19,6 +20,7 @@ void printHelp();
 
 int main() {
 
+    //make random truly random
     srand(time(0));
 
     bool quitGame = false;
@@ -27,17 +29,19 @@ int main() {
     printf("Welcome to Blackjack!\n");
     printf("Type 'help' for instructions\n");
 
-    Deck deck;
+    Deck deck;              //this deck will hold all the cards at the game
 
-    Player player;
-    Dealer dealer;
+    Player player;          
+    Dealer dealer;          //inherits from Player
 
+    //start a fresh game
     newGame(deck, player, dealer);
 
     while(!quitGame) {
 
+        //ask the player what he want's to do
         cin >> userLine;
-        toLowerCase(userLine);
+        toLowerCase(userLine);  //change to lower case to make it easier to parse
 
         if(userLine == "quit" || userLine == "exit")
             quitGame = true;
@@ -45,7 +49,7 @@ int main() {
 
             printf("You stand\n");
             printf("Dealer takes cards\n");
-            dealer.fillHand(deck);
+            dealer.fillHand(deck);  //see dealer.hpp
 
             if(dealer.getPoints() > 21){
 
@@ -74,7 +78,7 @@ int main() {
 
             printf("You hit\n");
             printf("Dealer gives you a card\n");
-            player.giveCard(deck);
+            player.giveCard(deck);  //see player.hpp
             printPlayerStatus(player);
 
             if(player.getPoints() > 21){
@@ -115,22 +119,22 @@ void newGame(Deck& deck, Player& player, Dealer& dealer){
 
         if(choice == "y"){
 
-            deck.setNewDeck();
+            deck.setNewDeck();  //see deck.hpp
             printf("Dealer shuffles the deck...\n");
-            deck.shuffle();
+            deck.shuffle();     //see deck.hpp
 
-            player.emptyHand();
-            dealer.emptyHand();
+            player.emptyHand(); //see player.hpp
+            dealer.emptyHand(); //as above
 
             printf("\nThe game now begins!\n");
 
             printf("Dealer gives you two cards\n");
-            player.giveCard(deck);
+            player.giveCard(deck);  //see player.hpp
             player.giveCard(deck);
 
             printf("Dealer takes one card\n");
             dealer.giveCard(deck);
-            dealer.revealCard();
+            dealer.revealCard();    //see dealer.hpp
             printPlayerStatus(player);
         }
         else if(choice == "help"){
@@ -147,11 +151,12 @@ void newGame(Deck& deck, Player& player, Dealer& dealer){
 void printPlayerStatus(Player& player){
 
     printf("You have %d points, your cards are:\n", player.getPoints());
-    player.printHand();
+    player.printHand(); //see player.hpp
 }
 
 void toLowerCase(string& s){
 
+    //iterate through all letters of the string and convert them to lower case
     for(int i = 0; i < s.size(); i++){
 
         s[i] = tolower(s[i]);
@@ -163,7 +168,7 @@ void printHelp(){
     printf("Your goal in this game is to get your points as close "
            "as possible to 21\n"
            "Cards 2-9 count as their face values,\n"
-           "Jack, Queen and King count as 10 points and\n"
+           "10, Jack, Queen and King count as 10 points and\n"
            "Aces count as either 1 or 11, whichever is more "
            "favourable in your situation.\n"
            "You can:\n'hit'('h') to take another card\n"

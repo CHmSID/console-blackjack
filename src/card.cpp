@@ -10,10 +10,6 @@ Card::Card(int id, int suit){
     this->suit = suit;
 }
 
-Card::~Card(){
-
-}
-
 int Card::getCardId()const{
 
     return id;
@@ -24,10 +20,10 @@ char* Card::getVerboseValue()const{
     if(id == 0)
         return (char *)"Ace";
     else if(id > 0 && id < 10){
-        stringstream out;
+        stringstream out;   //it's difficult to convert int to char*
         out << (id + 1);
         string a = out.str();
-        return &a[0];
+        return &a[0];       //return the pointer to the first character
     }
     else if(id == 10)
         return (char *)"Jack";

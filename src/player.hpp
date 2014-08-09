@@ -9,17 +9,18 @@ using std::vector;
 class Player {
 
 public:
-	Player();
-	~Player();
 
 	void giveCard(Deck& deck);	//when the players says 'hit', he get's another card
+                                //from the deck, ie: that card is removed from the deck
 	void emptyHand();	//when the player says 'stand' or
-						//goes over 21, deletes all cards in player's hand
-	int getPoints();	//when the player says 'stand'
-	void printHand();
+						//goes over 21, removes all cards from player's hand
+	int getPoints();	//used in various situations, 
+                        //especially when the player says 'stand'
+	void printHand();   //shows player's points and his cards
 
-protected:
-	vector<Card> playerHand;
+protected:  //since Dealer will inherit from this class, and he'll need direct access
+            //to playerHand
+	vector<Card> playerHand;   //a container for objects of type Card
 };
 
 #endif

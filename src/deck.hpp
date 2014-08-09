@@ -8,17 +8,17 @@ using std::vector;
 class Deck {
 
 public:
-    // Deck();
-    // ~Deck();
 
     void setNewDeck();  //puts all cards back into the deck
             //only use together with Player.emptyHand()
-            //to avoid duplicate cards
-    void shuffle();
+            //to avoid duplicate cards in player's hand
+    void shuffle();     //pretty self-explanatory
     void printDeck();   //Debug procedure
-    int getSize()const;
+    int getSize()const; //how many cards in the deck
 
-    vector<Card>* getDeck();
+    vector<Card>* getDeck();    //this returns a pointer to variable 'deck'
+                                //it allows me to use deck's methods
+                                //from different classes
 
 private:
     vector<Card> deck;
