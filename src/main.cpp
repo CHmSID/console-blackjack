@@ -7,12 +7,15 @@
 #include <iostream>
 
 using std::string;
+using std::tolower;
 using std::cin;
 using std::srand;
 using std::time;
 
 void newGame(Deck& deck, Player& player, Dealer& dealer);
 void printPlayerStatus(Player& player);
+void toLowerCase(string& s);
+void printHelp();
 
 int main() {
 
@@ -34,6 +37,7 @@ int main() {
     while(!quitGame) {
 
         cin >> userLine;
+        toLowerCase(userLine);
 
         if(userLine == "quit" || userLine == "exit")
             quitGame = true;
@@ -50,12 +54,14 @@ int main() {
             }
             else if(dealer.getPoints() > player.getPoints()){
 
-                printf("Dealer has more points than you, you loose.\n");
+                printf("Dealer beats you by %d points, you loose.\n",
+                    dealer.getPoints() - player.getPoints());
                 newGame(deck, player, dealer);
             }
             else if(dealer.getPoints() < player.getPoints()){
 
-                printf("You have more points than the dealer, you win!\n");
+                printf("You beat the dealer by %d points, you win!\n",
+                    player.getPoints() - dealer.getPoints());
                 newGame(deck, player, dealer);
             }
             else if(dealer.getPoints() == player.getPoints()){
@@ -69,10 +75,12 @@ int main() {
             printf("You hit\n");
             printf("Dealer gives you a card\n");
             player.giveCard(deck);
+            printPlayerStatus(player);
 
             if(player.getPoints() > 21){
 
-                printf("You hit over 21 points, you loose.\n");
+                printf("You hit over 21 by %d points, you loose.\n",
+                    player.getPoints() - 21);
                 newGame(deck, player, dealer);
             }
             else if(player.getPoints() == 21){
@@ -86,56 +94,81 @@ int main() {
             printPlayerStatus(player);
         }
         else if(userLine == "help"){
-            printf("Your goal in this game is to get your points as close "
-                "as possible to 21\n"
-                "You can:\n'hit' to take another card\n"
-                "'stand' to check the dealer\n"
-                "'list' to check your hand\n"
-                "'quit' or 'exit' to end the program and\n"
-                "'help' to bring up this text again\n");
+            
+            printHelp();
         }
     }
 
     return 0;
 }
 
-/* one more thing , you should use assert() and static_assert() to enforce 
-   class invariants and pre-conditions, and post-conditions*/
-
 void newGame(Deck& deck, Player& player, Dealer& dealer){
 
-    printf("Would you like to play?(Y/n)\n");
+    
+    string choice = "";
 
-    string choice;
-    cin >> choice;
+    do{
+        printf("Would you like to play?(Y/n)\n");
+        cin >> choice;
 
-    if(choice == "y" || choice == "Y"){
+        toLowerCase(choice);
 
-        deck.setNewDeck();
-        printf("Dealer shuffles the deck...\n");
-        deck.shuffle();
+        if(choice == "y"){
 
-        player.emptyHand();
-        dealer.emptyHand();
+            deck.setNewDeck();
+            printf("Dealer shuffles the deck...\n");
+            deck.shuffle();
 
-        printf("\nThe game now begins!\n");
+            player.emptyHand();
+            dealer.emptyHand();
 
-        printf("Dealer gives you two cards\n");
-        player.giveCard(deck);
-        player.giveCard(deck);
+            printf("\nThe game now begins!\n");
 
-        printf("Dealer takes one card\n");
-        dealer.giveCard(deck);
-        dealer.revealCard();
-    }
-    else{
+            printf("Dealer gives you two cards\n");
+            player.giveCard(deck);
+            player.giveCard(deck);
 
-        exit(0);
-    }
+            printf("Dealer takes one card\n");
+            dealer.giveCard(deck);
+            dealer.revealCard();
+            printPlayerStatus(player);
+        }
+        else if(choice == "help"){
+
+            printHelp();
+        }
+        else if(choice == "n"){
+
+            exit(0);
+        }
+    }while(choice != "y" && choice != "n");
 }
 
 void printPlayerStatus(Player& player){
 
     printf("You have %d points, your cards are:\n", player.getPoints());
     player.printHand();
+}
+
+void toLowerCase(string& s){
+
+    for(int i = 0; i < s.size(); i++){
+
+        s[i] = tolower(s[i]);
+    }
+}
+
+void printHelp(){
+
+    printf("Your goal in this game is to get your points as close "
+           "as possible to 21\n"
+           "Cards 2-9 count as their face values,\n"
+           "Jack, Queen and King count as 10 points and\n"
+           "Aces count as either 1 or 11, whichever is more "
+           "favourable in your situation.\n"
+           "You can:\n'hit'('h') to take another card\n"
+           "'stand'('s') to check the dealer\n"
+           "'list'('l') to check your hand\n"
+           "'quit' or 'exit' to end the program and\n"
+           "'help' to bring up this text again\n");
 }
